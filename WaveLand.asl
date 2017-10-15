@@ -2,6 +2,7 @@ state("WaveLand")
 {
 	byte level : 0x043584D0;
 	double bossHp : 0x04623824, 0x124, 0x14, 0xBC, 0xC8, 0x8, 0x44, 0x10, 0x7C, 0x0;
+	int sword : 0x04351AE8, 0x0, 0x6E0, 0xC, 0xCC;
 }
 
 startup
@@ -16,6 +17,7 @@ startup
 	settings.Add("LevelEnd", true, "Split when exiting a level");
 	settings.Add("NightmareStart", false, "Split when entering a nightmare");
 	settings.Add("NightmareEnd", true, "Split when exiting a nightmare");
+	settings.Add("Sword", true, "Split when collecting the sword");
 
 	settings.SetToolTip("AutoStart", "Does not check for \"New Game\" file, but instead for the opening cutscene.");
 	settings.SetToolTip("AutoReset", "Should be used with caution. You will be responsible for any accidental exits.");
@@ -27,6 +29,7 @@ startup
 	settings.SetToolTip("LevelEnd", "Currently splits even if you didn't get the shard.");
 	settings.SetToolTip("NightmareStart", "Splits after the white fade transition.");
 	settings.SetToolTip("NightmareEnd", "Splits in the transition from a nightmare to the overworld.");
+	settings.SetToolTip("Sword", "Does not split for the sword in the boss fight.");
 
 	vars.Tutorial1 = 59;
 	vars.Tutorial2 = 60;
@@ -46,6 +49,8 @@ startup
 	vars.World5 = 52;
 	vars.PathWorld6 = 55;
 	vars.World6 = 54;
+
+	vars.SwordCliff = 50;
 	
 	vars.FirstLevelWorld = new bool[6];
 	vars.Worlds = new int[] {vars.World1, vars.World2, vars.World3, vars.World4, vars.World5, vars.World6};
@@ -142,9 +147,17 @@ split
 	if(settings["NightmareEnd"]
 	&& old.level <= 42 && old.level % 7 == 0
 	&& current.level != old.level
-	&& current.level != 75)
+	&& current.level != 71)
 	{
 		vars.Debug("Nightmare ended.");
+		return true;
+	}
+
+	if(settings["Sword"]
+	&& current.level == vars.SwordCliff
+	&& (current.sword - old.sword) == 1)
+	{
+		vars.Debug("Sword collected.");
 		return true;
 	}
 

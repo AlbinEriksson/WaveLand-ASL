@@ -1,4 +1,4 @@
-# WaveLand ASL 2.0
+# WaveLand ASL 2.1
 A LiveSplit auto splitter for [WaveLand](http://rologfos.com/) 1.1.4 and onward
 
 ## Features
@@ -19,6 +19,8 @@ There are many options so you can customize the automatic splits to your prefere
  * Nightmares
    * Entering
    * Exiting
+ * Sword
+   * Collecting sword on the cliff, and not in the boss fight
 
 ## How to install
 If you can't find it in LiveSplit itself, you can manually install it by:
@@ -35,7 +37,6 @@ Currently supported for the Any% category. Planned categories include:
 
 ## Missing Features
 We are still trying to add more features, to make up for other categories:
- * Splitting on sword collection
  * Splitting on savior
  * Checking for shards
    * To make sure to split when you actually beat a level, as opposed to if you don't get the shard but exit anyway.
