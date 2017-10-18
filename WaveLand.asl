@@ -3,6 +3,7 @@ state("WaveLand")
 	byte level : 0x043584D0;
 	double bossHp : 0x04623824, 0x124, 0x14, 0xBC, 0xC8, 0x8, 0x44, 0x10, 0x7C, 0x0;
 	int sword : 0x04351AE8, 0x0, 0x6E0, 0xC, 0xCC;
+	float fps : 0x04338B84, 0xA0, 0x78, 0x668;
 }
 
 startup
@@ -49,11 +50,14 @@ startup
 	vars.World5 = 52;
 	vars.PathWorld6 = 55;
 	vars.World6 = 54;
+	vars.Worlds = new int[] {vars.World1, vars.World2, vars.World3, vars.World4, vars.World5, vars.World6};
 
 	vars.SwordCliff = 50;
 	
+	vars.ReinitRunVariables = false;
+	
 	vars.FirstLevelWorld = new bool[6];
-	vars.Worlds = new int[] {vars.World1, vars.World2, vars.World3, vars.World4, vars.World5, vars.World6};
+	vars.GameTimeTicks = 0L;
 
 	Action<string> Debug = (text) => {
 		print("[WaveLand Autosplitter] " + text);
@@ -76,12 +80,19 @@ reset
 
 update
 {
-	if(old.level != current.level && current.level == 71)
+	if(timer.CurrentPhase == TimerPhase.NotRunning && vars.GameTimeTicks != 0)
 	{
+		vars.GameTimeTicks = 0;
 		vars.FirstLevelWorld = new bool[6];
 	}
 	
 	return true;
+}
+
+gameTime
+{
+	vars.GameTimeTicks += (long)(2777.7777777777778D * current.fps);
+	return TimeSpan.FromTicks(vars.GameTimeTicks);
 }
 
 split
