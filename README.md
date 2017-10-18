@@ -23,7 +23,13 @@ There are many options so you can customize the automatic splits to your prefere
    * Collecting sword on the cliff, and not in the boss fight
 
 ## How to install
-If you can't find it in LiveSplit itself, you can manually install it by:
+### In LiveSplit
+The easiest way to install this autosplitter is within LiveSplit itself.
+ 1. In "Edit Splits...", search for "WaveLand" in the games list
+ 2. You should see that the autosplitter is available, so click "Activate"
+ 3. Click "Settings" and check the options you need
+### Manually
+If you can't find it in LiveSplit itself, you can manually install it.
  1. Download WaveLand.asl
  2. Edit your LiveSplit layout
  3. Click the plus icon and add Control -> Scriptable Auto Splitter
