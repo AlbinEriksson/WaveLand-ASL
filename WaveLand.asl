@@ -3,7 +3,7 @@ state("WaveLand")
 	byte level : 0x043584D0;
 	double bossHp : 0x04623824, 0x124, 0x14, 0xBC, 0xC8, 0x8, 0x44, 0x10, 0x7C, 0x0;
 	int sword : 0x04351AE8, 0x0, 0x6E0, 0xC, 0xCC;
-	float fps : 0x04338B84, 0xA0, 0x78, 0x668;
+	long nanosecondCounter : 0x04358418;
 }
 
 startup
@@ -57,7 +57,7 @@ startup
 	vars.ReinitRunVariables = false;
 	
 	vars.FirstLevelWorld = new bool[6];
-	vars.GameTimeTicks = 0L;
+	vars.StartTime = 0L;
 
 	Action<string> Debug = (text) => {
 		print("[WaveLand Autosplitter] " + text);
@@ -80,10 +80,15 @@ reset
 
 update
 {
-	if(timer.CurrentPhase == TimerPhase.NotRunning && vars.GameTimeTicks != 0)
+	if(timer.CurrentPhase == TimerPhase.NotRunning && vars.StartTime >= 0)
 	{
-		vars.GameTimeTicks = 0;
 		vars.FirstLevelWorld = new bool[6];
+		vars.StartTime = -1;
+	}
+
+	if(timer.CurrentPhase == TimerPhase.Running && vars.StartTime == -1)
+	{
+		vars.StartTime = current.nanosecondCounter * 10;
 	}
 	
 	return true;
@@ -91,8 +96,7 @@ update
 
 gameTime
 {
-	vars.GameTimeTicks += (long)(2777.7777777777778D * current.fps);
-	return TimeSpan.FromTicks(vars.GameTimeTicks);
+	return TimeSpan.FromTicks(current.nanosecondCounter * 10 - vars.StartTime);
 }
 
 split
