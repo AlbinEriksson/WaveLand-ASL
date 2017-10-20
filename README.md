@@ -1,4 +1,4 @@
-# WaveLand ASL 2.2
+# WaveLand ASL 2.2.1
 A LiveSplit auto splitter for [WaveLand](http://rologfos.com/) 1.1.4 and onward
 
 ## Features
@@ -8,7 +8,7 @@ There are many options so you can customize the automatic splits to your prefere
  * Reset timer
    * Makes it automatically reset when exiting to main menu
  * Game time
-   * Uses FPS to calculate slow-downs (might not be 100% accurate, looking for better solution)
+   * Uses an in-game nanosecond counter (should be accurate, somehow always syncs up to real time unless you slow down the game, need someone to confirm if game time actually makes a difference)
  * Tutorial
    * In-between tutorial maps
    * End of tutorial
