@@ -4,6 +4,7 @@ state("WaveLand")
 	double bossHp : 0x04623824, 0x124, 0x14, 0xBC, 0xC8, 0x8, 0x44, 0x10, 0x7C, 0x0;
 	int sword : 0x04351AE8, 0x0, 0x6E0, 0xC, 0xCC;
 	long nanosecondCounter : 0x04358418;
+	int wraithAlive : 0x04351AE8, 0x0, 0x80, 0xC, 0x48, 0x14, 0xBC, 0x68, 0xC8, 0x24, 0x30, 0x18, 0x24;
 }
 
 startup
@@ -19,6 +20,7 @@ startup
 	settings.Add("NightmareStart", false, "Split when entering a nightmare");
 	settings.Add("NightmareEnd", true, "Split when exiting a nightmare");
 	settings.Add("Sword", true, "Split when collecting the sword");
+	settings.Add("Savior", true, "Split when saving the wraith");
 
 	settings.SetToolTip("AutoStart", "For unknown reasons, the auto-start is a split-second slow on the first run after LiveSplit starts.\nTo solve this, start a run and reset it afterward.");
 	settings.SetToolTip("AutoReset", "Should be used with caution. You will be responsible for any accidental exits.");
@@ -31,6 +33,7 @@ startup
 	settings.SetToolTip("NightmareStart", "Splits after the white fade transition.");
 	settings.SetToolTip("NightmareEnd", "Splits in the transition from a nightmare to the overworld.");
 	settings.SetToolTip("Sword", "Does not split for the sword in the boss fight.");
+	settings.SetToolTip("Savior", "Splits when the wraith gets hit by the sword.");
 
 	vars.Tutorial1 = 59;
 	vars.Tutorial2 = 60;
@@ -53,6 +56,8 @@ startup
 	vars.Worlds = new int[] {vars.World1, vars.World2, vars.World3, vars.World4, vars.World5, vars.World6};
 
 	vars.SwordCliff = 50;
+
+	vars.Nightmare3 = 21;
 	
 	vars.FirstLevelWorld = new bool[6];
 	vars.StartTime = 0L;
@@ -174,6 +179,14 @@ split
 		return true;
 	}
 
+	if(settings["Savior"]
+	&& current.level == vars.Nightmare3
+	&& current.wraithAlive == 0 && old.wraithAlive == 1)
+	{
+		vars.Debug("Wraith saved.");
+		return true;
+	}
+	
 	if(current.level == 43 && current.bossHp <= 0 && old.bossHp > 0)
 	{
 		return true;
