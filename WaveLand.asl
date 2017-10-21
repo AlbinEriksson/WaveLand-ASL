@@ -8,7 +8,7 @@ state("WaveLand")
 
 startup
 {
-	settings.Add("AutoStart", true, "Start timer when opening a new file");
+	settings.Add("AutoStart", true, "Start timer when opening a new file (NOTE: Starts late on first run)");
 	settings.Add("AutoReset", false, "Reset timer when exiting to the main menu");
 	settings.Add("TutorialEnd", true, "Split when tutorial ends");
 	settings.Add("Tutorial", false, "Split between tutorial maps", "TutorialEnd");
@@ -20,7 +20,7 @@ startup
 	settings.Add("NightmareEnd", true, "Split when exiting a nightmare");
 	settings.Add("Sword", true, "Split when collecting the sword");
 
-	settings.SetToolTip("AutoStart", "(WARNING: Disabled until a proper auto-start is found!)");
+	settings.SetToolTip("AutoStart", "For unknown reasons, the auto-start is a split-second slow on the first run after LiveSplit starts.\nTo solve this, start a run and reset it afterward.");
 	settings.SetToolTip("AutoReset", "Should be used with caution. You will be responsible for any accidental exits.");
 	settings.SetToolTip("TutorialEnd", "Splits when the cutscene after falling from the tutorial starts.");
 	settings.SetToolTip("Tutorial", "Splits in the transition between tutorial maps.");
@@ -54,8 +54,6 @@ startup
 
 	vars.SwordCliff = 50;
 	
-	vars.ReinitRunVariables = false;
-	
 	vars.FirstLevelWorld = new bool[6];
 	vars.StartTime = 0L;
 
@@ -64,6 +62,12 @@ startup
 	};
 	vars.Debug = Debug;
 	vars.Debug("Initialized!");
+}
+
+start
+{
+	return settings["AutoStart"]
+	    && old.level == 75 && current.level == 65;
 }
 
 reset
