@@ -3,8 +3,8 @@ A LiveSplit auto splitter for [WaveLand](http://rologfos.com/) 1.1.4 and onward
 
 ## Features
 There are many options so you can customize the automatic splits to your preference:
- * Start timer
-   * Starts when you are in the opening cutscene
+ * ~~Start timer~~
+   * **WARNING**: Currently disabled due to inaccurate timing, looking for better solution
  * Reset timer
    * Makes it automatically reset when exiting to main menu
  * Game time
@@ -45,6 +45,7 @@ Currently supported for the Any% category. Planned categories include:
 
 ## Missing Features
 We are still trying to add more features, to make up for other categories:
+ * Proper auto-start (should start timer the same frame the file is selected)
  * Splitting on savior
  * Checking for shards
    * To make sure to split when you actually beat a level, as opposed to if you don't get the shard but exit anyway.
