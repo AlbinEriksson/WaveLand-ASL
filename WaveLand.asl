@@ -20,7 +20,7 @@ startup
 	settings.Add("NightmareEnd", true, "Split when exiting a nightmare");
 	settings.Add("Sword", true, "Split when collecting the sword");
 
-	settings.SetToolTip("AutoStart", "Does not check for \"New Game\" file, but instead for the opening cutscene.");
+	settings.SetToolTip("AutoStart", "(WARNING: Disabled until a proper auto-start is found!)");
 	settings.SetToolTip("AutoReset", "Should be used with caution. You will be responsible for any accidental exits.");
 	settings.SetToolTip("TutorialEnd", "Splits when the cutscene after falling from the tutorial starts.");
 	settings.SetToolTip("Tutorial", "Splits in the transition between tutorial maps.");
@@ -64,12 +64,6 @@ startup
 	};
 	vars.Debug = Debug;
 	vars.Debug("Initialized!");
-}
-
-start
-{
-	return settings["AutoStart"]
-	    && old.level == 75 && current.level == 65;
 }
 
 reset
