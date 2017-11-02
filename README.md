@@ -18,6 +18,9 @@ There are many options so you can customize the automatic splits to your prefere
    * Entering first level of a world
    * When entering a level
    * When exiting a level
+ * Coin Levels
+   * When entering a level
+   * When exiting a level (does not take number of coins into account)
  * Nightmares
    * Entering
    * Exiting
@@ -43,6 +46,6 @@ If you can't find it in LiveSplit itself, you can manually install it.
  5. Choose your options and start speedrunning!
 
 ## Missing Features
-We are still trying to add more features, to make up for other categories:
+We are still trying to add more features, for improvements and other categories:
  * Checking for shards
    * To make sure to split when you actually beat a level, as opposed to if you don't get the shard but exit anyway.
