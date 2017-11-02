@@ -17,6 +17,8 @@ startup
 	settings.Add("LevelFirst", true, "Split when entering the first level of a world");
 	settings.Add("LevelAll", false, "Split when entering any level", "LevelFirst");
 	settings.Add("LevelEnd", true, "Split when exiting a level");
+	settings.Add("CoinLevelStart", false, "Split when entering a coin level");
+	settings.Add("CoinLevelEnd", true, "Split when exiting a coin level");
 	settings.Add("NightmareStart", false, "Split when entering a nightmare");
 	settings.Add("NightmareEnd", true, "Split when exiting a nightmare");
 	settings.Add("Sword", true, "Split when collecting the sword");
@@ -30,6 +32,8 @@ startup
 	settings.SetToolTip("LevelFirst", "Splits only once, and only on the first level you select in each world.");
 	settings.SetToolTip("LevelAll", "Overrides first level split, and instead splits when starting any level.");
 	settings.SetToolTip("LevelEnd", "Currently splits even if you didn't get the shard.");
+	settings.SetToolTip("CoinLevelStart", "Splits in the transition between hub maps and coin levels.");
+	settings.SetToolTip("CoinLevelEnd", "Splits regardless of the amount of coins collected.");
 	settings.SetToolTip("NightmareStart", "Splits after the white fade transition.");
 	settings.SetToolTip("NightmareEnd", "Splits in the transition from a nightmare to the overworld.");
 	settings.SetToolTip("Sword", "Does not split for the sword in the boss fight.");
@@ -151,6 +155,22 @@ split
 	&& current.level != old.level)
 	{
 		vars.Debug("Level ended.");
+		return true;
+	}
+
+	if(settings["CoinLevelStart"]
+	&& 56 <= current.level && current.level <= 58
+	&& (((old.level - 45) / 2) == (current.level - 56)))
+	{
+		vars.Debug("Coin level started");
+		return true;
+	}
+
+	if(settings["CoinLevelEnd"]
+	&& 56 <= old.level && old.level <= 58
+	&& (((current.level - 45) / 2) == (old.level - 56)))
+	{
+		vars.Debug("Coin level ended.");
 		return true;
 	}
 
