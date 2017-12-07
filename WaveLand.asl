@@ -21,8 +21,8 @@ startup
 	settings.Add("CoinLevelEnd", true, "Split when exiting a coin level");
 	settings.Add("NightmareStart", false, "Split when entering a nightmare");
 	settings.Add("NightmareEnd", true, "Split when exiting a nightmare");
-	settings.Add("Sword", true, "Split when collecting the sword");
-	settings.Add("Savior", true, "Split when saving the wraith");
+	settings.Add("Sword", false, "Split when collecting the sword");
+	settings.Add("Savior", false, "Split when the wraith dies");
 
 	settings.SetToolTip("AutoStart", "For unknown reasons, the auto-start is a split-second slow on the first run after LiveSplit starts.\nTo solve this, start a run and reset it afterward.");
 	settings.SetToolTip("AutoReset", "Should be used with caution. You will be responsible for any accidental exits.");
@@ -37,7 +37,7 @@ startup
 	settings.SetToolTip("NightmareStart", "Splits after the white fade transition.");
 	settings.SetToolTip("NightmareEnd", "Splits in the transition from a nightmare to the overworld.");
 	settings.SetToolTip("Sword", "Does not split for the sword in the boss fight.");
-	settings.SetToolTip("Savior", "Splits when the wraith gets hit by the sword.");
+	settings.SetToolTip("Savior", "Splits when the wraith dies by the sword or the light barrier at the end of Nightmare 3.");
 
 	vars.Tutorial1 = 59;
 	vars.Tutorial2 = 60;
