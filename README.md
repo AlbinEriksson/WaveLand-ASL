@@ -1,4 +1,4 @@
-## **Doesn't work in 1.2.0 and onward, we are working on it!**
+## **Some things doesn't work in 1.2.0 and onward, we are working on it!**
 
 # WaveLand ASL 3.0.0
 A LiveSplit auto splitter for [WaveLand](http://rologfos.com/) 1.1.4.
@@ -9,7 +9,7 @@ There are many options so you can customize the automatic splits to your prefere
    * Note: starts late on first run after starting LiveSplit. To fix this, start and stop the timer once before doing any actual speedruns.
  * Reset timer
    * Makes it automatically reset when exiting to main menu
- * Game time
+ * ~~Game time~~ **(BROKEN)**
    * Uses an in-game nanosecond counter (should be accurate, somehow always syncs up to real time unless you slow down the game, need someone to confirm if game time actually makes a difference)
  * Tutorial
    * In-between tutorial maps
@@ -28,9 +28,9 @@ There are many options so you can customize the automatic splits to your prefere
    * Exiting
  * Boss fight
    * Killing the final boss (the end of most run categories)
- * Sword
+ * ~~Sword~~ **(BROKEN)**
    * Collecting sword on the cliff, and not in the boss fight
- * Savior
+ * ~~Savior~~ **(BROKEN)**
    * When you hit the wraith with the sword
 
 ## How to install
@@ -49,5 +49,10 @@ If you can't find it in LiveSplit itself, you can manually install it.
 
 ## Missing Features
 We are still trying to add more features, for improvements and other categories:
+ * Update to 1.2.0
+   * Sword
+   * Savior
+   * Game time
  * Checking for shards
    * To make sure to split when you actually beat a level, as opposed to if you don't get the shard but exit anyway.
+ * Add Dark World splits
