@@ -1,4 +1,4 @@
-# WaveLand ASL 3.0.5
+# WaveLand ASL 3.1.0
 A LiveSplit auto splitter for [WaveLand](http://rologfos.com/) 1.2.2.
 
 ## Features
