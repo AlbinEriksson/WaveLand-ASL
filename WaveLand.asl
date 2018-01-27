@@ -202,7 +202,7 @@ split
 
 	if(settings["Savior"]
 	&& current.level == vars.Nightmare3
-	&& current.wraithDead == 1 && old.wraithDead == 0)
+	&& current.wraithDead == 2 && old.wraithDead == 0)
 	{
 		vars.Debug("Wraith saved.");
 		return true;
