@@ -23,6 +23,8 @@ startup
 	settings.Add("NightmareEnd", true, "Split when exiting a nightmare");
 	settings.Add("Sword", false, "Split when collecting the sword");
 	settings.Add("Savior", false, "Split when the wraith dies");
+	settings.Add("AutoStartCustomLevel", false, "Start timer when opening a custom level");
+	settings.Add("CustomLevel", false, "Split when exiting a custom level");
 
 	settings.SetToolTip("AutoStart", "For unknown reasons, the auto-start is a split-second slow on the first run after LiveSplit starts.\nTo solve this, start a run and reset it afterward.");
 	settings.SetToolTip("AutoReset", "Should be used with caution. You will be responsible for any accidental exits.");
@@ -38,7 +40,7 @@ startup
 	settings.SetToolTip("NightmareEnd", "Splits in the transition from a nightmare to the overworld.");
 	settings.SetToolTip("Sword", "Does not split for the sword in the boss fight.");
 	settings.SetToolTip("Savior", "Splits when the wraith dies by the sword or the light barrier at the end of Nightmare 3.");
-
+	
 	vars.Tutorial1 = 59;
 	vars.Tutorial2 = 60;
 	vars.Tutorial3 = 61;
@@ -75,8 +77,8 @@ startup
 
 start
 {
-	return settings["AutoStart"]
-	    && old.level == 75 && current.level == 65;
+	return (settings["AutoStart"] && old.level == 75 && current.level == 65);
+		|| (settings["AutoStartCustomLevel"] && old.level == 77 && current.level == 79);
 }
 
 reset
@@ -205,6 +207,14 @@ split
 	&& current.wraithDead == 1 && old.wraithDead == 0)
 	{
 		vars.Debug("Wraith saved.");
+		return true;
+	}
+	
+	if(settings["CustomLevel"]
+	&& old.level == 79
+	&& current.level == 77)
+	{
+		vars.Debug("Custom level ended.");
 		return true;
 	}
 	
