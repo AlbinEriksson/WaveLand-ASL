@@ -77,7 +77,7 @@ startup
 
 start
 {
-	return (settings["AutoStart"] && old.level == 75 && current.level == 65);
+	return (settings["AutoStart"] && old.level == 75 && current.level == 65)
 		|| (settings["AutoStartCustomLevel"] && old.level == 77 && current.level == 79);
 }
 
