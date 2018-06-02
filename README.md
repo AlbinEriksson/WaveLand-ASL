@@ -1,4 +1,4 @@
-# WaveLand ASL 3.1.3
+# WaveLand ASL 3.1.4
 A LiveSplit auto splitter for [WaveLand](http://rologfos.com/) 1.3.1.
 
 ## Features
@@ -30,6 +30,8 @@ There are many options so you can customize the automatic splits to your prefere
    * Collecting sword on the cliff, and not in the boss fight
  * Savior
    * When you hit the wraith with the sword
+ * Custom levels
+   * Starts and splits on custom levels
 
 ## How to install
 ### In LiveSplit
