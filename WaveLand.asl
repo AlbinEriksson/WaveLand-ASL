@@ -78,7 +78,7 @@ startup
 start
 {
 	return (settings["AutoStart"] && old.level == 75 && current.level == 65)
-		|| (settings["AutoStartCustomLevel"] && old.level == 77 && current.level == 79);
+		|| (settings["AutoStartCustomLevel"] && old.level == 77 && current.level == 80);
 }
 
 reset
@@ -211,7 +211,7 @@ split
 	}
 	
 	if(settings["CustomLevel"]
-	&& old.level == 79
+	&& old.level == 80
 	&& current.level == 77)
 	{
 		vars.Debug("Custom level ended.");
