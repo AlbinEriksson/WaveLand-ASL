@@ -245,7 +245,8 @@ split
 	}
 	
 	if(settings["AllRooms"]
-	&& current.level != old.level)
+	&& current.level != old.level
+	&& current.level >= 0)
 	{
 		vars.Debug("New room loaded.");
 		return true;
