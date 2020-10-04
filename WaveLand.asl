@@ -24,6 +24,9 @@ startup
 	settings.Add("Savior", false, "Split when the wraith dies");
 	settings.Add("AutoStartCustomLevel", false, "Start timer when opening a custom level");
 	settings.Add("CustomLevel", false, "Split when exiting a custom level");
+	settings.Add("AllRooms", false, "Split upon loading any room");
+	settings.Add("AutoStartAnyFile", false, "Start timer when opening any file");
+	settings.Add("CustomLevelMode", false, "Only track time in custom levels (custom level mode)");
 
 	settings.SetToolTip("AutoStart", "For unknown reasons, the auto-start is a split-second slow on the first run after LiveSplit starts.\nTo solve this, start a run and reset it afterward.");
 	settings.SetToolTip("AutoReset", "Should be used with caution. You will be responsible for any accidental exits.");
@@ -39,7 +42,10 @@ startup
 	settings.SetToolTip("NightmareEnd", "Splits in the transition from a nightmare to the overworld.");
 	settings.SetToolTip("Sword", "Does not split for the sword in the boss fight.");
 	settings.SetToolTip("Savior", "Splits when the wraith dies by the sword or the light barrier at the end of Nightmare 3.");
-	
+	settings.SetToolTip("AllRooms", "Used for Max Rooms runs, this option will split every time the room number changes.");
+	settings.SetToolTip("AutoStartAnyFile", "Used for runs where prepared save files are allowed, such as Max Rooms.");
+	settings.SetToolTip("CustomLevelMode", "Used for custom level runs. The game time will only count up while in a custom level.\nNOTE: Make sure to read the speedrun leaderboard rules carefully!");
+
 	vars.Tutorial1 = 59;
 	vars.Tutorial2 = 60;
 	vars.Tutorial3 = 61;
@@ -76,14 +82,45 @@ startup
 
 start
 {
-	return (settings["AutoStart"] && old.level == 75 && current.level == 65)
-		|| (settings["AutoStartCustomLevel"] && old.level == 77 && current.level == 80);
+	if(settings["AutoStart"]
+	&& old.level == 75
+	&& current.level == 65)
+	{
+		return true;
+	}
+		
+	if(settings["AutoStartCustomLevel"]
+	&& old.level == 77
+	&& current.level == 80)
+	{
+		return true;
+	}
+	
+	if(settings["AutoStartAnyFile"]
+	&& old.level == 75
+	&& current.level != 74
+	&& current.level != 75)
+	{
+		return true;
+	}
+	
+	return false;
 }
 
 reset
 {
 	return settings["AutoReset"]
 	    && old.level != current.level && current.level == 71;
+}
+
+isLoading
+{
+	if(settings["CustomLevelMode"] && current.level != 80)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 update
@@ -204,6 +241,13 @@ split
 	&& current.level == 77)
 	{
 		vars.Debug("Custom level ended.");
+		return true;
+	}
+	
+	if(settings["AllRooms"]
+	&& current.level != old.level)
+	{
+		vars.Debug("New room loaded.");
 		return true;
 	}
 	
