@@ -1,4 +1,4 @@
-# WaveLand ASL 3.1.5
+# WaveLand ASL 3.2
 A LiveSplit auto splitter for [WaveLand](http://rologfos.com/waveland) 1.4.1.
 
 ## Features
@@ -32,6 +32,11 @@ There are many options so you can customize the automatic splits to your prefere
    * When you hit the wraith with the sword
  * Custom levels
    * Starts and splits on custom levels
+   * Timer pausing between levels (for load removal)
+ * Other speedrun categories
+   * Max Rooms
+     * Starting timer on any prepared file
+     * Splitting on all rooms
 
 ## How to install
 ### In LiveSplit
